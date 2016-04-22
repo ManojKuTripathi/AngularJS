@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.1/foundation.css"/>
+</head>
+<body>
+
+
+<div ng-app="myApp">
+
+
+    <div ng-controller="firstCtrl">
+        <button ng-click="loadData()">Load Data</button>
+
+        <input type="text" ng-model="abc.name" placeholder="Search By Name"/>
+        <input type="text" ng-model="abc.role" placeholder="Search By Role"/>
+        <input type="text" ng-model="abc.status" placeholder="Search By Status"/>
+        <input type="text" ng-model="abc.$" placeholder="Search Any"/>
+        <br>
+        <!--{{employees | filter:{name:'Priya'} }}-->
+
+
+        <table>
+            <tr ng-repeat="employee in employees | filter:abc">
+                <td>{{employee.name}}</td>
+                <td>{{employee.role}}</td>
+                <td>{{employee.status}}</td>
+            </tr>
+        </table>
+    </div>
+
+
+</div><script src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp', [])
+
+    app.factory('MessageFactory', function () {
+        return {
+            message: 'Some Message',
+
+            reverse: function (input) {
+                return input.split('').reverse().join('')
+            }
+        }
+    })
+
+    app.filter('capitalize', function () {
+        return function (input) {
+            if (input) {
+//                Write own logic to capitalize
+                return input[0].toUpperCase() + input.slice(1);
+            }
+        }
+    })
+    app.controller('firstCtrl', function ($scope, MessageFactory, $http) {
+//        $scope.message = 'Some Message'
+        console.log($scope)
+        $scope.data = MessageFactory;
+        $scope.list = ['a', 'b', 'c', 'd']
+
+        $scope.loadData = function () {
+
+            $.ajax({
+                url: "http://localhost:63342/NIITAngularJSDemo/dummy.json",
+                success: function (data) {
+                    console.log(data);
+                    $scope.employees = data
+                    $scope.$apply();
+                }
+            });
+
+            /*$http({
+             url: 'http://localhost:63342/NIITAngularJSDemo/dummy.json',
+             method: 'GET'
+             }).success(function(data){
+             console.log(data);
+             $scope.employees = data
+             })*/
+
+//            $scope.employees =
+        }
+
+    })
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Without Angular with JQuery Demo-Powered by TKHTS.COM</title>
+
+</head>
+<body>
+<label>Name:</label>
+<input type="text" id="name" placeholder="Type Name Here" maxlength="20" autocomplete="off">
+<br>
+<div id="displayNameDiv" class="box">Welcome</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#name").keyup(function () {
+            $("#displayNameDiv").html("Welcome " + $("#name").val());
+        });
+    });
+
+</script>
+</body>
+</html>

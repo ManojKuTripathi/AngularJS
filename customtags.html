@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.1/foundation.css"/>-->
+</head>
+<body>
+
+
+<div ng-app="myApp">
+    <div ntl-badge></div>
+ <!--  <ntl-badge></ntl-badge>
+
+    <ntl-badge></ntl-badge>
+    <ntl-badge></ntl-badge>
+    <ntl-badge></ntl-badge>
+
+    <div class="ntl-badge"></div>
+    <p class="ntl-badge"></p>-->
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp', [])
+
+    app.directive('ntlBadge', function(){
+        return {
+            restrict: 'A',
+            template: '<button class="btn btn-primary" type="button">Messages <span class="badge">4</span></button>'
+        }
+    })
+
+</script>
+</body>
+</html>

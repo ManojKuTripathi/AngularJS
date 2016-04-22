@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.1/foundation.css"/>
+</head>
+<body >
+
+
+<div ng-app="myApp">
+
+
+
+    <div  ng-controller="firstCtrl">
+       FirstCtrl: <input type="text" ng-model="data.message"/>
+        {{data.reverse('ABC')}}
+        {{data.message | lowercase}}
+    </div>
+
+    <div  ng-controller="secondCtrl">
+        SecondCtrl:  <input type="text" ng-model="abc.message"/>
+        {{abc.reverse(abc.message)}}
+    </div>
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp', [])
+
+    app.factory('MessageFactory', function(){
+        return {
+            message: 'Some Message',
+            key1: 'valu1',
+            key2: 'value2',
+            reverse : function(input){
+                return  input.split('').reverse().join('')
+        }
+        }
+    })
+
+    app.controller('firstCtrl', function($scope, MessageFactory){
+//        $scope.message = 'Some Message'
+        $scope.data = MessageFactory;
+    })
+
+    app.controller('secondCtrl', function($scope, MessageFactory){
+        console.log('Second Controller Initialized')
+//        $scope.message = 'Some Message'
+        $scope.abc = MessageFactory;
+    })
+
+
+</script>
+</body>
+</html>

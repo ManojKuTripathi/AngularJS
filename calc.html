@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.1/foundation.css"/>
+</head>
+<body >
+
+
+<div ng-app="calcModule" ng-controller="calcController">
+
+    <input type="number" ng-model="oper1" placeholder="Operand 1"/>
+    <input type="number" ng-model="oper2" placeholder="Operand 2"/>
+    <button ng-click="add()"> + </button>
+    <button ng-click="sub()"> - </button>
+    <button ng-click="mul()"> * </button>
+    <button ng-click="div()"> / </button>
+    <br>
+    Result: {{result}}
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script>
+    var app = angular.module('calcModule', [])
+    app.controller('calcController', function($scope){
+        $scope.add = function(){
+            $scope.result = $scope.oper1 + $scope.oper2
+        }
+        $scope.sub = function(){
+            $scope.result = $scope.oper1 - $scope.oper2
+        }
+        $scope.mul = function(){
+            $scope.result = $scope.oper1 * $scope.oper2
+        }
+        $scope.div = function(){
+            $scope.result = $scope.oper1 / $scope.oper2
+        }
+    })
+
+</script>
+</body>
+</html>

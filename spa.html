@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://getbootstrap.com/examples/signin/signin.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+
+
+</head>
+<body ng-app="myApp">
+
+<ng-view></ng-view>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
+
+<script>
+
+    var app = angular.module('myApp', ['ngRoute'])
+
+    app.config(function ($routeProvider) {
+        $routeProvider.when("/", {
+            templateUrl: 'partial/home.html',
+            controller: 'AppCtrl'
+        }).when("/aboutus", {
+            templateUrl: 'partial/aboutus.html',
+            controller: 'LandingCtrl'
+        }).when("/magazine/:city/:country", {
+            redirectTo: function (params, path, search) {
+                console.log(params)
+                return params.city
+            }
+        }).when("/delhi", {
+            templateUrl: 'partial/delhi.html'
+        }).otherwise({
+            redirectTo: '/'
+        })
+    })
+
+
+    app.factory('DataFactory', function () {
+        return {
+            email: ''
+        }
+    })
+
+
+
+    app.controller('AppCtrl', function ($scope, $http, $location, DataFactory) {
+
+        $scope.data = DataFactory
+        $scope.signin = function () {
+            $http({
+                url: 'dummy.json',
+                method: 'GET'
+            }).success(function (data) {
+                console.log(data)
+                if (data.auth) {
+                    $location.path("/aboutus")
+                }
+                else {
+                    $scope.errorMessage = "Invalid User/Password"
+                }
+            })
+        }
+    })
+
+</script>
+<script src="landing.js"></script>
+</body>
+</html>

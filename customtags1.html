@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.1/foundation.css"/>
+</head>
+<body>
+
+
+<div ng-app="myApp">
+    <div ntl-badge></div>
+
+    <div ng-controller="AppCtrl">
+        <enter mystyle="button"></enter>
+
+       <!-- <div enter mystyle="panel"></div>
+        <div enter mystyle="button"></div>-->
+
+    </div>
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp', [])
+
+    app.controller('AppCtrl', function ($scope) {
+        $scope.today = new Date()
+        console.log($scope)
+    })
+
+    app.directive('ntlBadge', function () {
+        return {
+            restrict: 'EA',
+            templateUrl: 'partial/badge.html'
+        }
+    })
+
+
+    app.directive('enter', function () {
+        return {
+            restrict: 'EA',
+            template: "Current Date: {{today | date:'medium'}}",
+            link: function (scope, element, attrs) {
+                console.log(scope);
+
+                element.bind('mouseenter', function(){
+                    element.addClass(attrs.mystyle);
+
+                })
+                element.bind('mouseleave', function(){
+                    element.removeClass(attrs.mystyle);
+                })
+
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

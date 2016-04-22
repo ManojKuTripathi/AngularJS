@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+
+</head>
+<body>
+
+
+<div ng-app="myApp">
+    <div ng-controller="AppCtrl">
+
+        <div ng-repeat="obj in list">
+            <div ntl-badge text="{{obj.text}}" count="{{obj.count}}">Content of the tag</div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp', [])
+
+    app.controller('AppCtrl', function ($scope) {
+        console.log($scope)
+
+        $scope.list = [{
+            text: 'Inbox', count: 45
+        }, {
+            text: 'Sent', count: 5
+        },{
+            text: 'Inbox', count: 45
+        }, {
+            text: 'Sent', count: 5
+        }
+        ]
+    })
+
+    app.directive('ntlBadge', function () {
+        return {
+            restrict: 'EA',
+            templateUrl: 'partial/badge.html',
+            scope: {
+                text: '@text',
+                count: '@count'
+            },
+            transclude: true,
+
+            compile: function(element, attrs){
+                console.log('Compile Function called')
+            }
+
+            /*link: function (scope, element, attrs) {
+                console.log('Link Function called')
+                /!*scope.text = attrs.text
+                 scope.count = attrs.count*!/
+
+                element.bind('click', function () {
+
+                    scope.count++
+                    console.log('Count is' + scope.count)
+                    scope.$apply()
+                })
+            }*/
+        }
+    })
+
+
+</script>
+</body>
+</html>
