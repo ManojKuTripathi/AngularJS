@@ -52,8 +52,10 @@
         $scope.data = DataFactory
         $scope.signin = function () {
             $http({
-                url: 'dummy.json',
-                method: 'GET'
+                url: 'http://localhost:14457/WebDemo/DataServlet',
+                method: 'GET',
+                cache: true
+
             }).success(function (data) {
                 console.log(data)
                 if (data.auth) {
